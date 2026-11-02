@@ -51,15 +51,17 @@ export function stopReason(stop,profile){
  * match earlier in the visit, variety, and less travel. Distances are straight-line;
  * time uses an explicit planning allowance, never a pedestrian-route guarantee.
  * @param {Campus} campus @param {Profile} profile @param {Record<string,TourPoint>} points
- * @param {Position|null} position @param {number} [now] */
-export function recommendTour(campus,profile,points,position,now=Date.now()){
- const mapped=campus.stops.filter(s=>points[s.id]);
- const status=locationStatus(position,mapped.map(s=>points[s.id]),now);
+ * @param {Position|null} position @param {number} [now] @param {string[]} [excludedIds] */
+export function recommendTour(campus,profile,points,position,now=Date.now(),excludedIds=[]){
+ const available=campus.stops.filter(s=>!excludedIds.includes(s.id));
+ const mapped=available.filter(s=>points[s.id]);
+ const status=locationStatus(position,campus.stops.filter(s=>points[s.id]).map(s=>points[s.id]),now);
+ if(!available.length)return {status:'complete',stops:[],minutes:null,meters:null,startMeters:null};
  const origin=status==='ready'?position:null;
- const budget=[20,40,60].includes(profile.minutes)?profile.minutes:40;
- const limit=budget<=20?2:budget<=40?3:4;
- const ranked=[...campus.stops].sort((a,b)=>relevance(b,profile)-relevance(a,profile));
- if(!mapped.length)return {status,stops:ranked.slice(0,limit),minutes:null,meters:null,startMeters:null};
+ const budget=[10,20,40,60].includes(profile.minutes)?profile.minutes:40;
+ const limit=budget<=10?1:budget<=20?2:budget<=40?3:4;
+ const ranked=[...available].sort((a,b)=>relevance(b,profile)-relevance(a,profile));
+ if(!mapped.length)return {status:'unmapped',stops:ranked.slice(0,limit),minutes:null,meters:null,startMeters:null};
  // Bounded at eight candidates so adding future map data cannot create unbounded work.
  const candidates=[...mapped].sort((a,b)=>relevance(b,profile)-relevance(a,profile)).slice(0,8);
  /** @type {{stops:Stop[],score:number,minutes:number,meters:number}} */
@@ -86,3 +88,26 @@ export function recommendTour(campus,profile,points,position,now=Date.now()){
 /** No user's origin is embedded in the outgoing URL. Maps obtains it separately.
  * @param {TourPoint} point */
 export function walkingMapUrl(point){return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${point.latitude},${point.longitude}`)}&travelmode=walking`;}
+
+/** @typedef {{visited:string[],skipped:string[],finished:boolean}} TourProgress */
+/** Restore only this campus's explicit outcomes, never infer arrival from GPS.
+ * @param {unknown} value @param {Campus} campus @returns {TourProgress} */
+export function restoreProgress(value,campus){
+ const record=value&&typeof value==='object'?/** @type {Partial<TourProgress>} */(value):{};
+ /** @param {unknown} ids */
+ const valid=ids=>Array.isArray(ids)?[...new Set(ids.filter(id=>typeof id==='string'&&campus.stops.some(s=>s.id===id)))]:[];
+ const visited=valid(record.visited);
+ return {visited,skipped:valid(record.skipped).filter(id=>!visited.includes(id)),finished:record.finished===true};
+}
+/** Completing or skipping is explicit. Never count a skip as a visit.
+ * @param {TourProgress} progress @param {string[]} route @param {string} stopId
+ * @param {'visited'|'skipped'} outcome */
+export function advanceTour(progress,route,stopId,outcome){
+ if(!route.includes(stopId))return {progress,nextId:null};
+ const updated={visited:progress.visited.filter(id=>id!==stopId),skipped:progress.skipped.filter(id=>id!==stopId),finished:false};
+ updated[outcome].push(stopId);
+ const index=route.indexOf(stopId),order=[...route.slice(index+1),...route.slice(0,index)];
+ const nextId=order.find(id=>!updated.visited.includes(id)&&!updated.skipped.includes(id))??null;
+ updated.finished=nextId===null;
+ return {progress:updated,nextId};
+}

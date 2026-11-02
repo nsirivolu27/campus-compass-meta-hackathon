@@ -15,7 +15,7 @@ The `.env.local` file contains the server secret as plain text and is local deve
 
 1. Build with `npm run build`, then `android/gradlew.bat :app:assembleDebug` from the Android directory. Install `android/app/build/outputs/apk/debug/app-debug.apk` on your phone.
 2. Keep `npm run dev` running on the computer. Connect the phone with USB debugging authorized. Run `adb reverse tcp:4317 tcp:4317`.
-3. In the Android app open **Glasses → Campus AI connection** and enter the 8-digit pairing code printed by the server. This is a temporary app token, not your Meta key. Re-pair after restarting either the app or the server.
+3. In the Android app open **Glasses → Campus AI connection** and enter the 8-digit pairing code printed by the server. This is a temporary app token, not your Meta key. Pairing expires after one hour; re-pair after restarting either the app process or the server.
 4. Pair Gen 2 glasses in the Meta AI app. Enable Developer Mode, and enable the experimental **Speech** capability for your app in Wearables Developer Center as required by Meta. Choose **Meta glasses / voice + camera** in Try My Future.
 5. Select a campus and start a visit. Tap the question microphone. Grant Nearby devices and Meta microphone access when prompted. If registration opens Meta AI, finish it and tap the microphone again.
 6. Wait for **Listening through Meta glasses**, ask one question, and pause. A final transcript goes to Muse; the short answer is spoken using Android media output. Choose the glasses as media output and check **Test audio** first.
@@ -24,17 +24,17 @@ This path uses DAT **1.0.1 Speech** directly: no phone microphone or camera stre
 
 Speech is experimental and currently limited to development/beta channels. The app must remain in the foreground. Each question starts with an app microphone tap; custom Hey Meta invocation, frame-button activation, continuous conversation and screen-off operation are not implemented. Camera capture and voice run separately; after voice, reconnect the camera to take a photo.
 
-USB is the only implemented Android-to-server connection in this build. It is suitable for a desk/demo test, not an untethered campus walk. A deployed HTTPS backend with user authentication, persistent quotas and operating-cost controls is still needed for field use. Release builds reject the USB HTTP endpoint; cleartext is allowed only for debug loopback.
+USB is the default developer connection. An authenticated HTTPS path is also implemented for private demos; see [hosting setup](HOSTING.md). It has not been deployed or field-tested. Public student use still needs durable accounts, shared quotas and operating-cost controls. Release builds reject the USB HTTP endpoint; cleartext is allowed only for debug loopback.
 
 ## Sources and privacy
 
 - The server resolves campus IDs against the shipped national directory; clients cannot substitute source records. The three pilot campuses also supply their reviewed stop facts.
 - Muse can search for additional official campus information. Only selected-institution citations or supplied-source references are accepted. An answer without an accepted citation is replaced with a clear verification fallback.
 - Citation checks establish attribution, not factual entailment. Manually evaluate accuracy, freshness and campus attribution before relying on the guide for visitor access, hours, pricing or transport.
-- Journal entries, photos and precise location are not sent. Questions, selected campus, interest and up to four recent Q&A turns are sent to Meta. `store: false` disables Responses conversation storage; this is not a claim that Meta has no other operational retention.
+- Journal entries, photos and precise location are not sent. Questions, selected campus, major, interests and up to four recent Q&A turns are sent to Meta. `store: false` disables Responses conversation storage; this is not a claim that Meta has no other operational retention.
 - Follow-up context is held in app memory, scoped by campus, and cleared when the app reloads. Notes remain local. Navigating away cancels the request and late answers cannot overwrite a different campus.
 - Server errors never echo provider response bodies or API keys. Offline guide excerpts are labelled as saved content, not live AI answers.
-- Local demo limits: 100 model attempts per process run, 12/minute, two concurrent, 45-second provider timeout, 2,400 output tokens per attempt. Limits reset on server restart and are not a dollar spending cap. Pairing permits ten attempts per run. The server binds only to loopback and does not enable cross-origin access.
+- Local demo limits: 100 model attempts per process run, 12/minute, two concurrent, 45-second provider timeout, 2,400 output tokens per attempt. Limits reset on server restart and are not a dollar spending cap. Pairing permits ten attempts per run. Local mode binds only to loopback. Hosted mode requires an exact HTTPS origin and always requires pairing for questions; neither mode enables cross-origin access.
 
 ## Verification before a student pilot
 

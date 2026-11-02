@@ -264,7 +264,8 @@ class MainActivity : AppCompatActivity() {
         }
         @JavascriptInterface fun cancelGuide(id: String) = runOnUiThread { guideJobs.remove(id)?.cancel(); guide.cancel(id) }
         @JavascriptInterface fun pairGuide(code: String) = runOnUiThread {
-            if (!code.matches(Regex("[0-9]{8}"))) { emit("guide-status", "Enter the 8-digit pairing code from your computer."); return@runOnUiThread }
+            val pattern = if (guide.usbPreview) "[0-9]{8}" else "[a-f0-9]{32}"
+            if (!code.matches(Regex(pattern))) { emit("guide-status", if (guide.usbPreview) "Enter the 8-digit pairing code from your computer." else "Enter the 32-character pairing code from your private guide server."); return@runOnUiThread }
             lifecycleScope.launch {
                 try { guide.token = guide.request("pair", "pair", JSONObject().put("code", code).toString()).getString("token"); checkGuide() }
                 catch (error: Exception) { emit("guide-status", guideFailure(error)) }
@@ -279,13 +280,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun guideFailure(error: Exception): String = if (error is IllegalStateException) error.message ?: "The guide is unavailable."
-        else "Cannot reach the guide server. Connect USB, run adb reverse tcp:4317 tcp:4317, and keep npm run dev running."
+        else if (guide.usbPreview) "Cannot reach the guide server. Connect USB, run adb reverse tcp:4317 tcp:4317, and keep npm run dev running."
+        else "Cannot reach the HTTPS guide. Check your connection and whether the private guide server is running."
 
     private suspend fun checkGuide() {
         try {
             val result = guide.request("status", "status")
-            emit("guide-status", if (!result.optBoolean("configured")) "Muse Spark · add your API key on the computer"
-                else if (guide.token.isEmpty()) "Muse Spark · enter the USB pairing code"
+            emit("guide-status", if (!result.optBoolean("configured")) "Muse Spark · add your API key on the guide server"
+                else if (!result.optBoolean("paired")) "Muse Spark · pairing needed or expired"
                 else "Muse Spark · paired, ready to ask")
         } catch (error: Exception) { emit("guide-status", guideFailure(error)) }
     }

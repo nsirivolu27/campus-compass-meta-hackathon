@@ -11,7 +11,7 @@
 
 ## Actions remaining
 
-- Complete the personal credit claim and Meta account setup; confirm credits and create the server API key.
+- Credit grant verified November 1: Meta Billing shows $150 in free credits. No separate grant-confirmation email was found. Finish the payment-method setup and create the server API key.
 - Follow the [current progress and next steps](README.md).
 - Check final rules, submission format and repository-visibility requirements before submitting.
 

@@ -5,9 +5,22 @@ const normalize=value=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toL
 
 /** @param {DirectoryEntry[]} records @param {string} query @param {string} state @param {number} [limit] */
 export function searchCampuses(records,query,state='',limit=25){
- const words=normalize(query).split(' ').filter(Boolean);
+ const phrase=normalize(query),words=phrase.split(' ').filter(Boolean);
  const matches=records.filter(r=>(!state||r.state===state)&&words.every(w=>normalize(`${r.name} ${r.aliases} ${r.city} ${r.state}`).includes(w)));
- return {total:matches.length,records:matches.slice(0,limit)};
+ /** @param {DirectoryEntry} record */
+ function relevance(record){
+  if(!phrase)return 0;
+  const name=normalize(record.name),aliases=normalize(record.aliases);
+  if(name===phrase)return 100;
+  if(record.aliases.split(/[,;|]|\s{2,}/).some(alias=>normalize(alias)===phrase))return 90;
+  if(` ${aliases} `.includes(` ${phrase} `))return 80;
+  if(name.startsWith(phrase))return 70;
+  if(` ${name} `.includes(` ${phrase} `))return 60;
+  if(normalize(record.city)===phrase)return 50;
+  return words.every(word=>` ${name} ${aliases} `.includes(` ${word} `))?40:0;
+ }
+ const ranked=matches.map(record=>({record,score:relevance(record)})).sort((a,b)=>b.score-a.score);
+ return {total:matches.length,records:ranked.slice(0,limit).map(item=>item.record)};
 }
 
 /** Universal reflection activities, never represented as verified campus locations.

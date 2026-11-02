@@ -34,6 +34,19 @@ test('directory retains two-year and technical institutions with safe links',()=
   const url=new URL(link);assert.equal(url.protocol,'https:');assert.equal(url.username,'');
  }
 });
+
+test('exact school names and aliases outrank incidental substrings without promoting sourced guides',()=>{
+ assert.equal(searchCampuses(directory,'UVA').records[0].id,'uva');
+ assert.equal(searchCampuses(directory,'UVA Wise').records[0].name,"University of Virginia's College at Wise");
+ assert.equal(searchCampuses(directory,'Middlesex College').records[0].name,'Middlesex College');
+ const sample=[
+  {...directory[0],name:'Abcd institute',aliases:'',coverage:'curated'},
+  {...directory[1],name:'Independent college',aliases:'ABC',coverage:'self-guided'}
+ ];
+ const original=JSON.stringify(sample);
+ assert.equal(searchCampuses(sample,'ABC').records[0].name,'Independent college');
+ assert.equal(JSON.stringify(sample),original);
+});
 test('new campuses support journal restoration without inventing building facts',()=>{
  const entry=searchCampuses(directory,'Middlesex','NJ').records[0];
  const campus=selfGuidedCampus(entry);

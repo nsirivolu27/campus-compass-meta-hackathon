@@ -1,8 +1,18 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.net.URI
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+}
+// Only the public origin is compiled into the app. Model keys stay on the server.
+val guideOrigin = providers.gradleProperty("guideOrigin").orNull?.trim()?.removeSuffix("/") ?: ""
+if (guideOrigin.isNotEmpty()) {
+    val uri = URI(guideOrigin)
+    require(uri.scheme == "https" && uri.host != null && uri.rawUserInfo == null &&
+        uri.rawPath.isNullOrEmpty() && uri.rawQuery == null && uri.rawFragment == null) {
+        "guideOrigin must be an HTTPS origin without credentials, path, query or fragment."
+    }
 }
 android {
     namespace = "app.trymyfuture"
@@ -14,6 +24,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "0.1.0"
+        buildConfigField("String", "GUIDE_ORIGIN", "\"$guideOrigin\"")
         resValue("string", "mwdat_application_id", "0")
         resValue("string", "mwdat_client_token", "0")
     }

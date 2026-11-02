@@ -87,3 +87,14 @@ The product scope is nationwide. UC San Diego, UT Austin and UVA are the first d
 - Browser checked: major/interests + manual Newcomb Hall origin produces a plan, Start opens its first stop, and Maps links contain the destination and walking mode. Real GPS and real walking paths have not been field-tested.
 
 - At a 390 × 844 browser viewport, the visit layout has no horizontal overflow. The recommended order and major survive reload; entering a new campus clears the previous route. Harvard was checked for an explicit unmapped activity fallback and no location request.
+
+
+## Adaptive visits and private HTTPS demo · November 1
+
+- 47 automated tests pass, including visited/skipped state, malformed restore data, ten-minute budgets, excluding resolved stops, exact abbreviation search ranking, hosted authorization, pairing limits and one-hour token expiry. Type checking and the browser/Android asset build pass.
+- Browser walkthrough: selected UVA with a computer-science/research profile and a Newcomb landmark start; skipped Peabody, marked Shannon visited, replanned with ten minutes remaining, resumed Newcomb after reload, and reached a recap showing two visited and one skipped. Cancelling a reconsideration preview preserves the skipped record. Sample preferences/outcomes were reset afterward; the existing journal entry was preserved.
+- Recap checked at 390 × 844 with no horizontal overflow (375 px client/content width). No browser console errors were recorded. UI captures remain outside the repository.
+- Android debug assembly and lint pass. The HTTPS-configured Kotlin build also compiles with a non-live test origin. Final debug APK uses the ordinary USB endpoint. This is compilation evidence, not a physical glasses or network test.
+- HTTPS server mode requires a random 32-character pairing code, expires tokens after an hour, and disables the local browser authorization shortcut and static web hosting. Native builds accept only an HTTPS origin, retain platform certificate validation and refuse redirects. See HOSTING.md for deployment requirements.
+- Deployment has not occurred. The container recipe was not built because the Docker engine is not running. HTTP proxy-boundary tests do not verify TLS hosting. Demo counters remain process-local, not persistent quotas or a dollar cap.
+- Meta Billing visibly confirmed $150 in free credits. Gmail search found no separate grant-confirmation email; API-key creation still showed disabled with no payment method on file. No model key is configured locally and no live Meta call has been verified. ADB showed no connected phone. Billing, live provider checks, actual GPS/walking paths and physical Gen 2 voice testing remain pending.

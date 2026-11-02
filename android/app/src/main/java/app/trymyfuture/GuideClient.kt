@@ -7,14 +7,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
-/** The APK carries no model key. A short-lived pairing token authorizes the local guide server. */
+/** The APK carries no model key. Pairing authorizes a private HTTPS or USB demo server. */
 class GuideClient {
     private val connections = ConcurrentHashMap<String, HttpURLConnection>()
     var token: String = ""
+    val usbPreview: Boolean = BuildConfig.GUIDE_ORIGIN.isEmpty() && BuildConfig.DEBUG
+    private val origin = BuildConfig.GUIDE_ORIGIN.ifEmpty { if (usbPreview) "http://127.0.0.1:4317" else "" }
 
     suspend fun request(id: String, path: String, body: String? = null): JSONObject = withContext(Dispatchers.IO) {
-        check(BuildConfig.DEBUG) { "This build needs a deployed HTTPS guide service. USB preview is debug-only." }
-        val connection = URL("http://127.0.0.1:4317/api/$path").openConnection() as HttpURLConnection
+        check(origin.isNotEmpty()) { "This build needs a configured HTTPS guide service. USB preview is debug-only." }
+        check(path in setOf("ask", "pair", "status")) { "Unknown guide action." }
+        val connection = URL("$origin/api/$path").openConnection() as HttpURLConnection
         connections[id] = connection
         try {
             connection.connectTimeout = 8000
@@ -29,6 +32,7 @@ class GuideClient {
                 connection.outputStream.use { it.write(body.toByteArray(Charsets.UTF_8)) }
             }
             val code = connection.responseCode
+            if (code == 401) token = ""
             val stream = if (code in 200..299) connection.inputStream else connection.errorStream
             val text = stream?.bufferedReader(Charsets.UTF_8)?.use { reader ->
                 val output = StringBuilder()

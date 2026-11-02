@@ -18,6 +18,8 @@ export function planVisit(campus, profile) {
 export function parseCommand(text) {
   const value = text.trim();
   if (/^(next|next stop)[.!]?$/i.test(value)) return {type:'next',text:''};
+  if (/^(skip|skip this stop|skip stop)[.!]?$/i.test(value)) return {type:'skip',text:''};
+  if (/^(finish tour|end tour)[.!]?$/i.test(value)) return {type:'finish',text:''};
   if (/^(read|read this|tell me about this|narrate)[.!]?$/i.test(value)) return {type:'read',text:''};
   if (/^(stop|stop speaking)[.!]?$/i.test(value)) return {type:'stop',text:''};
   const memory = value.match(/^(remember(?: that| this)?|save(?: that| this)?)[,: ]+(.+)/i);

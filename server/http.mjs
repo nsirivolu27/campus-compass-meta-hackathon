@@ -13,29 +13,38 @@ async function jsonBody(req) {
   try{return JSON.parse(Buffer.concat(parts).toString('utf8'));}catch{throw new GuideError(400,'invalid_json','Send a valid question.');}
 }
 
-/** Loopback-only development server. Android reaches it through USB adb reverse. */
-export function createGuideServer({root=resolve(import.meta.dirname,'../web'),apiKey='',model='muse-spark-1.3',pairCode,ask=askMuse}={}) {
-  const tokens=new Set();let pairingAttempts=0;let active=0;let calls=0;
+/** Local browser preview, or a private Android API behind an HTTPS reverse proxy. */
+export function createGuideServer({root=resolve(import.meta.dirname,'../web'),apiKey='',model='muse-spark-1.3',pairCode,publicOrigin='',ask=askMuse,now=Date.now}={}) {
+  let publicHost='';
+  if(publicOrigin){
+    const url=new URL(publicOrigin);
+    if(url.protocol!=='https:'||url.origin!==publicOrigin||url.username||url.password)throw new Error('Use an HTTPS origin without a path for TMF_PUBLIC_ORIGIN.');
+    if(!/^[a-f0-9]{32}$/.test(pairCode??''))throw new Error('Hosted pairing requires a random 32-character hexadecimal code.');
+    publicHost=url.host;
+  }
+  const tokens=new Map();let pairingAttempts=0;let active=0;let calls=0;
   let recent=[];
   return createServer(async(req,res)=>{
     const reply=(status,body)=>{if(res.destroyed)return;res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(JSON.stringify(body));};
     try {
       const host=req.headers.host??'';
-      if(!/^(127\.0\.0\.1|localhost):\d+$/.test(host))throw new GuideError(403,'host','Local access only.');
+      if(publicHost?host!==publicHost:!/^(127\.0\.0\.1|localhost):\d+$/.test(host))throw new GuideError(403,'host','Open the configured guide server.');
       const origin=req.headers.origin;
-      if(origin&&origin!==`http://${host}`)throw new GuideError(403,'origin','Open the guide on this server.');
+      if(origin&&origin!==(publicOrigin||`http://${host}`))throw new GuideError(403,'origin','Open the guide on this server.');
+      for(const [token,expires] of tokens)if(expires<=now())tokens.delete(token);
+      const token=req.headers.authorization?.replace(/^Bearer /,'');
+      const paired=tokens.has(token);
       const path=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
-      if(path==='/api/status'&&req.method==='GET'){reply(200,{configured:Boolean(apiKey),provider:'Meta Model API',model,remaining:Math.max(0,100-calls)});return;}
+      if(path==='/api/status'&&req.method==='GET'){reply(200,{configured:Boolean(apiKey),paired,provider:'Meta Model API',model,remaining:Math.max(0,100-calls)});return;}
       if(path==='/api/pair'&&req.method==='POST'){
         if(++pairingAttempts>10)throw new GuideError(429,'pair_limit','Restart the guide server to try pairing again.');
         const body=await jsonBody(req);
         if(!pairCode||!equal(body?.code,pairCode))throw new GuideError(401,'pair_code','That pairing code did not match. Use the code from the guide server terminal.');
-        const token=randomBytes(32).toString('hex');tokens.add(token);reply(200,{token});return;
+        const token=randomBytes(32).toString('hex');tokens.set(token,now()+60*60*1000);reply(200,{token,expiresIn:3600});return;
       }
       if(path==='/api/ask'&&req.method==='POST'){
-        const browser=origin===`http://${host}`&&req.headers['x-tmf-client']==='browser';
-        const token=req.headers.authorization?.replace(/^Bearer /,'');
-        if(!browser&&!tokens.has(token))throw new GuideError(401,'pair_required','Pair the Android app with this guide server first.');
+        const browser=!publicOrigin&&origin===`http://${host}`&&req.headers['x-tmf-client']==='browser';
+        if(!browser&&!paired)throw new GuideError(401,'pair_required','Pair the Android app with this guide server. Pairing expires after one hour or a server restart.');
         const body=await jsonBody(req);
         recent=recent.filter(time=>Date.now()-time<60000);
         if(active>=2||recent.length>=12||calls>=100)throw new GuideError(429,'guide_limit','The guide is at its demo request limit. Please wait, or check the guide server.');
@@ -45,6 +54,8 @@ export function createGuideServer({root=resolve(import.meta.dirname,'../web'),ap
         return;
       }
       if(path.startsWith('/api/'))throw new GuideError(404,'not_found','Unknown guide action.');
+      // A hosted instance serves only the paired Android API, never an unprotected web chat.
+      if(publicOrigin)throw new GuideError(404,'not_found','Use the paired Android app.');
       if(req.method!=='GET'&&req.method!=='HEAD')throw new GuideError(405,'method','Use GET.');
       const file=resolve(root,'.'+(path==='/'?'/index.html':path));
       if(!file.startsWith(root+sep)||!(extname(file) in mime))throw new GuideError(404,'not_found','Not found.');
