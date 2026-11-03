@@ -14,7 +14,7 @@ async function jsonBody(req) {
 }
 
 /** Local browser preview, or a private Android API behind an HTTPS reverse proxy. */
-export function createGuideServer({root=resolve(import.meta.dirname,'../web'),apiKey='',model='muse-spark-1.3',pairCode,publicOrigin='',ask=askMuse,now=Date.now}={}) {
+export function createGuideServer({root=resolve(import.meta.dirname,'../web'),apiKey='',model='muse-spark-1.3',pairCode,publicOrigin='',ask=askMuse,provider='Meta Model API',configured=Boolean(apiKey),now=Date.now}={}) {
   let publicHost='';
   if(publicOrigin){
     const url=new URL(publicOrigin);
@@ -35,7 +35,7 @@ export function createGuideServer({root=resolve(import.meta.dirname,'../web'),ap
       const token=req.headers.authorization?.replace(/^Bearer /,'');
       const paired=tokens.has(token);
       const path=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
-      if(path==='/api/status'&&req.method==='GET'){reply(200,{configured:Boolean(apiKey),paired,provider:'Meta Model API',model,remaining:Math.max(0,100-calls)});return;}
+      if(path==='/api/status'&&req.method==='GET'){reply(200,{configured,paired,provider,model,remaining:Math.max(0,100-calls)});return;}
       if(path==='/api/pair'&&req.method==='POST'){
         if(++pairingAttempts>10)throw new GuideError(429,'pair_limit','Restart the guide server to try pairing again.');
         const body=await jsonBody(req);
@@ -49,7 +49,7 @@ export function createGuideServer({root=resolve(import.meta.dirname,'../web'),ap
         recent=recent.filter(time=>Date.now()-time<60000);
         if(active>=2||recent.length>=12||calls>=100)throw new GuideError(429,'guide_limit','The guide is at its demo request limit. Please wait, or check the guide server.');
         const controller=new AbortController();res.on('close',()=>controller.abort());
-        active++;recent.push(Date.now());if(apiKey)calls++;
+        active++;recent.push(Date.now());if(configured)calls++;
         try{reply(200,await ask(body,{apiKey,model,signal:controller.signal}));}finally{active--;}
         return;
       }

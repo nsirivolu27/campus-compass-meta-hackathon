@@ -8,7 +8,7 @@ const pending=new Map();
 export function validateAnswer(value){
  if(!value||typeof value!=='object'||!('text' in value)||typeof value.text!=='string'||!value.text||!('sources' in value)||!Array.isArray(value.sources))throw new Error('The guide returned an unreadable answer. Please try again.');
  const sources=value.sources.filter(s=>{try{return typeof s.title==='string'&&new URL(s.url).protocol==='https:';}catch{return false;}});
- return {text:value.text,sources,grounded:'grounded' in value&&value.grounded===true,model:'Muse Spark',searched:'searched' in value&&value.searched===true};
+ return {text:value.text,sources,grounded:'grounded' in value&&value.grounded===true,model:'model' in value&&value.model==='Local Llama 3.1'?'Local Llama 3.1':'Muse Spark',searched:'searched' in value&&value.searched===true};
 }
 
 /** @param {GuideQuestion} question @param {AbortSignal} signal @returns {Promise<GuideAnswer>} */

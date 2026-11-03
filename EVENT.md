@@ -16,3 +16,5 @@
 - Check final rules, submission format and repository-visibility requirements before submitting.
 
 The credit-claim form and the project submission are separate. No project submission has been sent. This summary omits personal account details and the full email text.
+
+November 2 organizer reminder: a three-minute demo is important to judging and an open-source GitHub repository is mandatory. The public event page lists the deadline as November 4 at 9 PM ET.

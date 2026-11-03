@@ -1,22 +1,15 @@
 # Try My Future
+A prospective student has forty minutes between an admissions session and the trip home. What should they actually try? **Try My Future @ [college]** builds a visit around their starting point, possible major and interests, then keeps the questions they want to take home.
 
-An AI campus-guide prototype for the **[Meta Global AI Developer Hackathon](https://events.cerebralvalley.ai/e/meta-ai-developer-hackathon)**, October 26–November 4, 2026. Submission deadline: **November 4, 9 PM ET**.
+**[Meta Global AI Developer Hackathon](https://dev.meta.ai/events/global-hackathon) · Indie developer / Build for Your World.** Submission deadline: November 4, 2026, 9 PM ET.
 
-The idea: **Try My Future @ [college]** — explore a campus around your prospective major and personal interests, with a guide you can talk to through your glasses.
+## Try it
+With Node 22+ installed, run `npm run dev` and open the loopback URL printed in the terminal. No account or dependency installation is needed to plan a tour. For real local inference, start Ollama, install `llama3.1:8b`, then use `npm run demo` instead. Model weights are not included.
 
-## Progress · November 1
+## What works
+- Search 5,877 institutions. Twelve sourced building stops cover three campuses; other colleges offer self-guided activities.
+- Plan, replan, ask questions, keep notes and compare visits. GPS stays on the device.
+- Built with Llama: the local guide selects official evidence. The separate Muse Spark integration can search for official sources with a server key.
+- Android voice and glasses adapters compile. Physical Gen 2 capture and live Muse responses remain unverified.
 
-- Built: search across 5,877 institutions, personalized starting points, remaining-tour replanning, visited/skipped stops, recaps and notes. Mapped stops cover three campuses; other schools offer visit activities.
-- Implemented: Muse Spark Q&A, experimental Meta glasses voice and an authenticated HTTPS demo backend. **Deployment, live AI and physical glasses testing remain pending.**
-- Credits: **$150 applied**, verified in Meta Billing. Payment-method and API-key setup remain pending.
-- Checked locally: 47 tests, type checking, web/Android builds and Android lint passed.
-
-## Next
-
-- Finish billing and configure the server API key.
-- Test a real campus conversation through Gen 2 glasses.
-- Expand mapped stops and field-test routes. Google Maps handles walking directions; in-app estimates are approximate.
-
-[Event checklist](EVENT.md) · [Validation details](docs/VALIDATION.md)
-
-Work in progress. No hackathon submission has been sent.
+[Judge walkthrough and submission copy](docs/SUBMISSION.md) · [Android / Muse setup](docs/AI-SETUP.md) · [Validation](docs/VALIDATION.md)

@@ -286,9 +286,10 @@ class MainActivity : AppCompatActivity() {
     private suspend fun checkGuide() {
         try {
             val result = guide.request("status", "status")
+            val provider = if (result.optString("provider") == "Local Llama 3.1") "Local Llama 3.1" else "Muse Spark"
             emit("guide-status", if (!result.optBoolean("configured")) "Muse Spark · add your API key on the guide server"
-                else if (!result.optBoolean("paired")) "Muse Spark · pairing needed or expired"
-                else "Muse Spark · paired, ready to ask")
+                else if (!result.optBoolean("paired")) "$provider · pairing needed or expired"
+                else "$provider · paired, ready to ask")
         } catch (error: Exception) { emit("guide-status", guideFailure(error)) }
     }
 

@@ -98,3 +98,11 @@ The product scope is nationwide. UC San Diego, UT Austin and UVA are the first d
 - HTTPS server mode requires a random 32-character pairing code, expires tokens after an hour, and disables the local browser authorization shortcut and static web hosting. Native builds accept only an HTTPS origin, retain platform certificate validation and refuse redirects. See HOSTING.md for deployment requirements.
 - Deployment has not occurred. The container recipe was not built because the Docker engine is not running. HTTP proxy-boundary tests do not verify TLS hosting. Demo counters remain process-local, not persistent quotas or a dollar cap.
 - Meta Billing visibly confirmed $150 in free credits. Gmail search found no separate grant-confirmation email; API-key creation still showed disabled with no payment method on file. No model key is configured locally and no live Meta call has been verified. ADB showed no connected phone. Billing, live provider checks, actual GPS/walking paths and physical Gen 2 voice testing remain pending.
+
+
+## Submission candidate · November 2
+
+- 49 tests passed; strict web type checking, the web build, Android debug assembly and Android lint passed.
+- Browser walkthrough from a fresh origin: searched UVA, set history / research and quiet study, selected Shannon Library as the landmark, and received a three-stop estimate of 32 minutes. A typed question reached the installed Meta Llama 3.1 8B model. It selected the Shannon Library source and the browser displayed the university link. Saved the question, marked one stop visited and finished early. The recap retained one visited stop and one question.
+- First-run testing exposed cold loading and an hours question that selected a related library fact. The local server now warms model weights before listening and declines operational questions outside the scope of the saved records. This is a narrow demo check, not a benchmark of accuracy or response time.
+- No physical Android phone appeared in ADB. The video demonstrates the browser and local model only. A real Muse API call, Gen 2 microphone and speaker test, and hosted endpoint remain unverified.

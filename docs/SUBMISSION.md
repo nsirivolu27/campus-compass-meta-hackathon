@@ -1,18 +1,22 @@
-# Pitch draft
+# Try My Future — entry copy
 
-**Try My Future** helps students picture everyday life at any college they visit. Instead of collecting disconnected facts and photos, they can ask a campus question, hear a sourced answer, save what matters and compare visits later.
+**One line:** Turn a prospective student's starting point, major and free time into a campus visit they can try, question and remember.
 
-## Planned demo
+**Suggested track and theme:** Indie developer / Build for Your World. Confirm the track against the participant registration.
 
-1. Search for a college the visitor chooses.
-2. Ask a campus-life question through Meta glasses, then a follow-up.
-3. Hear the answer and open its university sources.
-4. Save an observation and compare it with another visit.
+**Description:** A tour guide can introduce a building. A prospective student needs to know what they would do there on an ordinary Tuesday. Try My Future starts with the college they choose, asks what matters to them, and recommends a first stop and a feasible sequence under an estimated time budget. At each stop, they can try an activity, ask a question and keep an observation. When time runs short, they can change the remaining tour without losing visited or skipped stops. A recap separates their own impressions from university information.
 
-## Current status
+**Use of Meta technology:** The demonstrated path runs Meta Llama 3.1 8B locally through Ollama. It selects an evidence ID from the chosen campus's supplied records; the server supplies the actual text and university URL. The model cannot author the displayed fact or substitute its own source. Directory-only campuses and unsupported operational questions get an explicit unknown. A separate Muse Spark integration supports official-site search with a server-side Meta key. Android integrates experimental Meta Wearables DAT speech and camera capture. The video shows a real browser question; it does not depict a verified glasses session.
 
-The app, national institution directory, journal, Muse Spark integration and experimental Meta speech adapter are built. Live model access and physical glasses behavior have not yet been validated. USB is required for the current Android server connection; visual landmark recognition and hands-free wake-word activation are not implemented.
+**Coverage and provenance:** The searchable directory is NCES IPEDS HD2025. Twelve sourced building pins currently cover UC San Diego, UT Austin and UVA. Other entries offer reflection activities rather than invented routes. Travel times are planning estimates, not field-verified walking or step-free navigation. The hackathon repo began from an earlier campus-guide prototype; attribution and the starting revision are in [development notes](DEVELOPMENT.md).
 
-The next two days focus on proving the voice conversation, not adding more features. See the [build plan](../README.md) and [email checklist](../EVENT.md).
+## Reproduce the demo
+1. Start Ollama with the official `llama3.1:8b` model installed. From the repo run `npm run demo` on Node 22+. The first launch warms the model. Open the printed local URL. For planner-only review, `npm run dev` runs without any key or model.
+2. Search **UVA**. Choose the main campus, enter **History**, **Research and quiet study spaces**, **40 minutes**, and **Shannon Library** as the starting landmark. No physical GPS is required.
+3. Preview the route, follow the estimate explanation and start it. Ask **Which library has study spaces and the Digital Humanities Center?** Open the answer's UVA Library source. Then ask whether it is open until midnight tonight: the local evidence cannot verify opening hours.
+4. Save a question, mark a stop visited, and finish for today. The recap keeps the observation with the campus. Try another college or compare questions in the journal.
+5. For Android USB testing follow [AI setup](AI-SETUP.md). Physical hardware is optional for the browser demo. Do not put provider keys in a submission field or APK.
 
-This is a working pitch, not a submitted entry. Include only demonstrated behavior in the final demo.
+**Evidence boundary:** Local Llama inference, app navigation and the Android build are separate checks. Muse account activation, an actual Gen 2 microphone-to-speaker session and a deployed HTTPS service have not been demonstrated.
+
+**Organizer reminder (November 2):** Prepare a three-minute demo and an open-source GitHub repository. The participant form and final declarations require a signed-in account. Keep third-party notices intact. Check originality/eligibility and disclose the earlier prototype; this document does not attest on behalf of the entrant.

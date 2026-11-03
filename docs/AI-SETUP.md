@@ -2,6 +2,10 @@
 
 The guide calls **Muse Spark 1.3 on Meta Model API**. It is a real provider integration, not a simulated answer generator. Live access needs an activated Meta account, credits/billing and an API key. No successful live call or physical glasses test has been recorded yet.
 
+## Judge demo: local Meta model
+
+For a real inference demonstration without billing, start Ollama on the guide computer, install `llama3.1:8b` and run `npm run demo`. Startup verifies and warms the model. The browser and paired Android client identify this mode as Local Llama 3.1. Questions and bounded follow-up context go to the loopback Ollama service on that computer. The model selects a source ID; the server returns the original campus fact and university link, or declines. This mode does not retrieve live web information. No model weights are distributed. Use `npm run dev` for Muse.
+
 ## Activate the account
 
 1. Open [Meta Model API](https://dev.meta.ai/) using the account associated with your hackathon entry. Claim the participant credits using the organizer's invitation. Check Billing for the grant; creating a key does not itself apply credits.
