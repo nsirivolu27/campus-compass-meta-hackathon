@@ -20,7 +20,7 @@ The `.env.local` file contains the server secret as plain text and is local deve
 1. Build with `npm run build`, then `android/gradlew.bat :app:assembleDebug` from the Android directory. Install `android/app/build/outputs/apk/debug/app-debug.apk` on your phone.
 2. Keep `npm run dev` running on the computer. Connect the phone with USB debugging authorized. Run `adb reverse tcp:4317 tcp:4317`.
 3. In the Android app open **Glasses → Campus AI connection** and enter the 8-digit pairing code printed by the server. This is a temporary app token, not your Meta key. Pairing expires after one hour; re-pair after restarting either the app process or the server.
-4. Pair Gen 2 glasses in the Meta AI app. Enable Developer Mode, and enable the experimental **Speech** capability for your app in Wearables Developer Center as required by Meta. Choose **Meta glasses / voice + camera** in Try My Future.
+4. Pair Gen 2 glasses in the Meta AI app. Enable Developer Mode, and enable the experimental **Speech** capability for your app in Wearables Developer Center as required by Meta. Choose **Meta glasses / voice + camera** in Campus Compass.
 5. Select a campus and start a visit. Tap the question microphone. Grant Nearby devices and Meta microphone access when prompted. If registration opens Meta AI, finish it and tap the microphone again.
 6. Wait for **Listening through Meta glasses**, ask one question, and pause. A final transcript goes to Muse; the short answer is spoken using Android media output. Choose the glasses as media output and check **Test audio** first.
 

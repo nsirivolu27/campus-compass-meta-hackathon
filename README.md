@@ -1,5 +1,5 @@
-# Try My Future
-A prospective student has forty minutes between an admissions session and the trip home. What should they actually try? **Try My Future @ [college]** builds a visit around their starting point, possible major and interests, then keeps the questions they want to take home.
+# Campus Compass
+A prospective student has forty minutes between an admissions session and the trip home. What should they actually try? **Campus Compass @ [college]** builds a visit around their starting point, possible major and interests, then keeps the questions they want to take home.
 
 **[Meta Global AI Developer Hackathon](https://dev.meta.ai/events/global-hackathon) · Indie developer / Build for Your World.** Submission deadline: November 4, 2026, 9 PM ET.
 

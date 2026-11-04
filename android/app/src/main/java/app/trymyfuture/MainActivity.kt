@@ -275,7 +275,7 @@ class MainActivity : AppCompatActivity() {
         @JavascriptInterface fun exportJournal(text: String) = runOnUiThread {
             if (text.length > 500_000 || pendingExport != null) return@runOnUiThread
             pendingExport = text
-            exportDocument.launch("try-my-future-journal.json")
+            exportDocument.launch("campus-compass-journal.json")
         }
     }
 

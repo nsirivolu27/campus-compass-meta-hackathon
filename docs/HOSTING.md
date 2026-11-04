@@ -11,7 +11,7 @@ Use a Node 22+ host or the included Dockerfile, behind a TLS-terminating reverse
 - `META_MODEL`: optional; defaults to `muse-spark-1.3`.
 - `PORT`: the internal HTTP port; defaults to `4317`.
 
-Start with `node scripts/serve.mjs`. Container build: `docker build -t try-my-future-guide .`. The build context excludes credentials, Git history and Android files. Set secrets at runtime, never as image build arguments.
+Start with `node scripts/serve.mjs`. Container build: `docker build -t campus-compass-guide .`. The build context excludes credentials, Git history and Android files. Set secrets at runtime, never as image build arguments.
 
 The proxy must preserve the public `Host` header, provide a valid public TLS certificate, allow at least 60 seconds for an answer, and keep the internal HTTP port inaccessible from the internet. The process binds to all container interfaces only when `TMF_PUBLIC_ORIGIN` is configured. It does not terminate TLS itself or trust forwarded headers. `GET /api/status` is the health check; configure the public Host header if checking internally. `/` deliberately returns 404 in hosted mode.
 

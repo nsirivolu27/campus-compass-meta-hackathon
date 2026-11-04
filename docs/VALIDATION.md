@@ -79,7 +79,7 @@ The product scope is nationwide. UC San Diego, UT Austin and UVA are the first d
 
 ## Personalized starting-point flow · October 27
 
-- Search → Try My Future @ college → major, interests, focus and time → current location or nearby landmark → suggested start and ordered stops → visit.
+- Search → Campus Compass @ college → major, interests, focus and time → current location or nearby landmark → suggested start and ordered stops → visit.
 - Official campus map points cover the existing 12 stops at UCSD, UT Austin and UVA. These are building reference points, not verified entrances. The nationwide directory does not yet provide mapped tours elsewhere.
 - The local planner exhaustively evaluates subsets/orders of up to eight sourced candidates, capped at 2/3/4 stops for 20/40/60 minutes. It rewards early subject/interest matches and variety, penalizes travel, and checks a budget using eight minutes per stop plus straight-line distance × 1.4 at 70 metres/minute. This is a planning heuristic, not an optimal or field-verified pedestrian route.
 - GPS is requested once by user action, kept only in memory, and omitted from persistence, journal export, Meta requests and Maps URLs. Maps receives only the destination pin and handles its own origin permission. Denied/unavailable, inaccurate (>100 m), stale (>2 minutes), and distant (>3 km from all mapped stops) fixes do not produce a claim of a nearby campus start. Distance thresholds are not campus boundaries.
@@ -116,3 +116,7 @@ Coverage tests check the entire cohort and feasible ten-minute starts at each pi
 
 Muse requests now include the ordered upcoming stops, the selected activity, interests, routine and planned minutes. Ordinary questions use a small search context. Hours and access questions use a medium context and require an institutional search citation before returning a grounded answer. The request and citation logic are tested locally. Live Muse latency and answer quality still require a configured provider key.
 The Virginia Tech local Llama question timed out during final inference checks, including a retry after model warm-up. The local demo remains a hardware-dependent fallback. No successful live Virginia Tech model answer is claimed for this revision.
+
+## Campus Compass rename · November 3, 2026
+
+Renamed the web interface, Android launcher label, spoken welcome, model identity, journal exports and entry copy. Preserved installed-app and storage identifiers. All 52 tests, strict TypeScript checking, web build, Android debug build and Android lint passed. The browser rendered Campus Compass @ Virginia Tech and the three-stop preview from Squires Student Center. No live Muse request or physical glasses test is claimed; the latest account check still required billing setup, and ADB listed no phone. Earlier privately archived demo videos retain the previous branding and need a fresh recording before submission.

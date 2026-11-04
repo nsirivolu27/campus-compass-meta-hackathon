@@ -48,7 +48,7 @@ def main():
     raw = ROOT / 'data/raw/HD2025.zip'
     raw.parent.mkdir(parents=True, exist_ok=True)
     if '--download' in sys.argv:
-        request = urllib.request.Request(URL, headers={'User-Agent': 'TryMyFuture-directory-import/0.1'})
+        request = urllib.request.Request(URL, headers={'User-Agent': 'CampusCompass-directory-import/0.1'})
         with urllib.request.urlopen(request, timeout=60) as response:
             content = response.read(15_000_001)
         if len(content) > 15_000_000:

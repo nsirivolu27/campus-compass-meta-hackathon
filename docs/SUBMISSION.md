@@ -1,10 +1,10 @@
-# Try My Future — entry copy
+# Campus Compass — entry copy
 
 **One line:** Turn a prospective student's starting point, major and free time into a campus visit they can try, question and remember.
 
 **Suggested track and theme:** Indie developer / Build for Your World. Confirm the track against the participant registration.
 
-**Description:** A tour guide can introduce a building. A prospective student needs to know what they would do there on an ordinary Tuesday. Try My Future starts with the college they choose, asks what matters to them, and recommends a first stop and a feasible sequence under an estimated time budget. At each stop, they can try an activity, ask a question and keep an observation. When time runs short, they can change the remaining tour without losing visited or skipped stops. A recap separates their own impressions from university information.
+**Description:** A tour guide can introduce a building. A prospective student needs to know what they would do there on an ordinary Tuesday. Campus Compass starts with the college they choose, asks what matters to them, and recommends a first stop and a feasible sequence under an estimated time budget. At each stop, they can try an activity, ask a question and keep an observation. When time runs short, they can change the remaining tour without losing visited or skipped stops. A recap separates their own impressions from university information.
 
 **Use of Meta technology:** The demonstrated path runs Meta Llama 3.1 8B locally through Ollama. It selects an evidence ID from the chosen campus's supplied records; the server supplies the actual text and university URL. The model cannot author the displayed fact or substitute its own source. Directory-only campuses and unsupported operational questions get an explicit unknown. Muse Spark uses a server-validated visit brief with the current stop, upcoming stops, student preferences and planned time. Questions about hours, access or fees require a university web citation. Live Muse testing requires a server key. Android integrates experimental Meta Wearables DAT speech and camera capture. The video shows a real browser question; it does not depict a verified glasses session.
 

@@ -15,7 +15,7 @@ const port=Number(process.env.PORT||4317);
 if(!Number.isInteger(port)||port<1||port>65535)throw new Error('PORT must be between 1 and 65535.');
 const server=createGuideServer({apiKey:local?'':apiKey,model:local?llamaModel:process.env.META_MODEL||'muse-spark-1.3',pairCode,publicOrigin,...(local?{ask:askLocalLlama,provider:llamaLabel,configured:true}:{})});
 server.listen(port,publicOrigin?'0.0.0.0':'127.0.0.1',()=>{
-  console.log(`Try My Future: ${publicOrigin||`http://127.0.0.1:${port}`}`);
+  console.log(`Campus Compass: ${publicOrigin||`http://127.0.0.1:${port}`}`);
   console.log(local?'Built with Llama · using local Llama 3.1 8B through Ollama.':apiKey?'Muse Spark key configured. An actual question will check model access.':'Muse Spark needs setup: run powershell -File scripts/setup-ai.ps1');
   console.log(`Private Android pairing code: ${pairCode}`);
   console.log(publicOrigin?'HTTPS proxy required. Pair from the matching Android build. Tokens expire in one hour. Keep this console private.':`Run adb reverse tcp:4317 tcp:${port}, then enter this code in the app’s Glasses settings.`);

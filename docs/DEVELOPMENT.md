@@ -32,6 +32,7 @@ Windows: use `gradlew.bat`. APK: `android/app/build/outputs/apk/debug/app-debug.
 - `android/`: WebView shell, narration, glasses speech and camera adapter.
 - `data/`: IPEDS institution database and [provenance](../data/README.md). Detailed guide facts link to university sources in `web/data.js`.
 - This event repo began from `nsirivolu27/try-my-future`, commit `a64fa34edb85d6cdf6248058419ed415bfc0a7e9`, on October 27, 2026.
+- The product was renamed Campus Compass on November 3. The Android application ID, callback scheme and existing storage keys retain their original identifiers so updates preserve installed-app data and vendor callbacks. These are compatibility identifiers, not the displayed brand.
 - Camera adapter and Gradle wrapper adapted from DUO Tour; retain [its MIT notice](../android/NOTICE-DUO.txt). Meta SDK terms apply separately.
 - Source Sans 3: [font license](FONT-LICENSE.txt), [source](https://github.com/google/fonts/tree/main/ofl/sourcesans3). Campus drawings are original illustrations, not university logos or photos.
 

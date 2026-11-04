@@ -12,7 +12,7 @@
         <intent><action android:name="android.speech.action.RECOGNIZE_SPEECH" /></intent>
         <intent><action android:name="android.intent.action.TTS_SERVICE" /></intent>
     </queries>
-    <application android:icon="@drawable/falling_block" android:allowBackup="false" android:label="Try My Future" android:supportsRtl="true" android:usesCleartextTraffic="false" android:theme="@style/Theme.TryMyFuture">
+    <application android:icon="@drawable/falling_block" android:allowBackup="false" android:label="Campus Compass" android:supportsRtl="true" android:usesCleartextTraffic="false" android:theme="@style/Theme.CampusCompass">
         <meta-data android:name="com.meta.wearable.mwdat.APPLICATION_ID" android:value="@string/mwdat_application_id" />
         <meta-data android:name="com.meta.wearable.mwdat.CLIENT_TOKEN" android:value="@string/mwdat_client_token" />
         <meta-data android:name="com.meta.wearable.mwdat.ANALYTICS_OPT_OUT" android:value="true" />

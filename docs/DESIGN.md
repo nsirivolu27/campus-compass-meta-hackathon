@@ -1,6 +1,6 @@
 # Interface direction
 
-The event app uses a light, conversational layout inspired by the Meta AI app: clear content hierarchy, restrained surfaces, rounded controls and accessible voice actions. The falling block-person mark remains Try My Future's own identity. This is a custom interface, not an imported Meta UI framework or an official Meta app.
+The event app uses a light, conversational layout inspired by the Meta AI app: clear content hierarchy, restrained surfaces, rounded controls and accessible voice actions. The falling block-person mark remains Campus Compass's own identity. This is a custom interface, not an imported Meta UI framework or an official Meta app.
 
 - White canvas, neutral text, blue primary actions; gold is a small logo accent.
 - Source Sans 3 stays bundled for consistent offline typography.

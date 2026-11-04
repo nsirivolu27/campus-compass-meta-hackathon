@@ -1,4 +1,4 @@
-# Working on Try My Future
+# Working on Campus Compass
 
 This is a standalone Android campus-visit app with an offline browser UI, not Fantasy Copilot. Keep work scoped to this repository.
 
