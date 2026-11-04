@@ -6,6 +6,8 @@ Built for the **[Meta Global AI Developer Hackathon](https://dev.meta.ai/events/
 
 ## Try it
 
+[Watch the 2:59 demo](https://github.com/nsirivolu27/campus-compass-meta-hackathon/releases/download/v0.1.0-hackathon/Campus-Compass-demo.mp4) · [Download the Android build and source](https://github.com/nsirivolu27/campus-compass-meta-hackathon/releases/tag/v0.1.0-hackathon). The demo uses real browser captures, captions and locally generated Kokoro narration.
+
 Node 22+: `npm run dev`, then open the local URL printed in the terminal. Planning works without a key or model. For real local inference, install [Ollama](https://ollama.com/), run `ollama pull llama3.2:3b`, then `npm run demo`. Model weights are not included.
 
 ## Progress · November 4

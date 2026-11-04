@@ -45,4 +45,6 @@ For Android USB pairing, see [AI setup](AI-SETUP.md). For exact test evidence an
 
 ## Manual submission
 
-Use the finished demo video link after uploading it to your chosen host. Review all text and your team listing, complete any personal-opinion questions, and make the promotion/consent choice yourself. The form has **Very likely** and **Very favorable** selected as instructed. No submission has been sent by the assistant.
+The [finished 2:59 demo](https://github.com/nsirivolu27/campus-compass-meta-hackathon/releases/download/v0.1.0-hackathon/Campus-Compass-demo.mp4) is public and linked in the submission draft. It uses real browser captures, English captions and locally generated Kokoro narration; the app itself uses device speech synthesis.
+
+Review all text and your team listing, complete any personal-opinion questions, and make the promotion/consent choice yourself. The form has **Very likely** and **Very favorable** selected as instructed. No submission has been sent by the assistant.
