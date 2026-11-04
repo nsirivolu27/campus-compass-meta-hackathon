@@ -4,7 +4,7 @@ The guide calls **Muse Spark 1.3 on Meta Model API**. It is a real provider inte
 
 ## Judge demo: local Meta model
 
-For a real inference demonstration without billing, start Ollama on the guide computer, install `llama3.1:8b` and run `npm run demo`. Startup verifies and warms the model. The browser and paired Android client identify this mode as Local Llama 3.1. Questions and bounded follow-up context go to the loopback Ollama service on that computer. The model selects a source ID; the server returns the original campus fact and university link, or declines. This mode does not retrieve live web information. No model weights are distributed. Use `npm run dev` for Muse.
+For a real inference demonstration without billing, start Ollama on the guide computer, install `llama3.2:3b` and run `npm run demo`. Startup verifies and warms the model. The browser and paired Android client identify this mode as Local Llama 3.2. Questions and bounded follow-up context go to the loopback Ollama service on that computer. The model selects a source ID; the server returns the original campus fact and university link, or declines. This mode does not retrieve live web information. No model weights are distributed. Use `npm run dev` for Muse.
 
 ## Activate the account
 

@@ -244,16 +244,16 @@ body:before{border:0}
 #main{padding-bottom:100px}
 h1,h2,h3{font-weight:600;letter-spacing:-.3px}
 .eyebrow,.section-label{letter-spacing:0;font-size:12px;font-weight:400}
-.welcome{text-align:center;padding:15px 0 24px}
+.welcome{text-align:left;padding:32px 0 28px}
 .companion-avatar{width:58px;height:58px;margin:0 auto 17px;display:grid;place-items:center;background:radial-gradient(circle at 20% 10%,var(--halo-blue),var(--brand-soft) 65%,var(--halo-violet));border-radius:50%}
 .companion-avatar img{width:36px;height:36px}
-.welcome h1{font-size:33px;font-weight:500;line-height:1.15;letter-spacing:-.65px;margin-bottom:10px}
-.welcome>p{font-size:14px;color:var(--muted);margin:0}
-.directory-launch{height:60px;border:1px solid var(--line);border-radius:24px;background:var(--paper);padding:10px 12px 10px 19px;margin:0;gap:12px}
+.welcome h1{font-size:36px;font-weight:600;line-height:1.12;letter-spacing:-.7px;margin-bottom:16px}
+.welcome>p{font-size:16px;color:var(--muted);margin:0}.welcome>.eyebrow{font-size:12px;margin-bottom:15px;color:var(--gold-ink)}
+.directory-launch{height:60px;border:1px solid var(--line);border-radius:18px;background:var(--paper);padding:10px 12px 10px 19px;margin:0;gap:12px}
 .directory-launch .search-symbol{font-size:26px;color:var(--muted)}
 .directory-launch>span:nth-child(2){font-size:16px;font-weight:400;color:var(--muted)}
 .directory-launch .search-arrow{display:grid;place-items:center;background:var(--brand);color:var(--white);height:36px;width:36px;border-radius:50%;font-size:24px;flex-shrink:0}
-.directory-caption{text-align:center;font-size:11px;color:var(--muted);margin:10px 0 21px}
+.directory-caption{text-align:left;font-size:12px;color:var(--muted);margin:10px 0 21px}
 .campus-switcher{border:0;gap:8px;margin-bottom:17px}
 .campus-switcher button{border:1px solid var(--line);border-radius:24px;background:var(--panel);padding:9px 8px;font-size:13px;min-height:42px;color:var(--ink)}
 .campus-switcher .selected{background:var(--brand-soft);border-color:var(--brand-soft);color:var(--brand);font-weight:600}
@@ -270,7 +270,7 @@ h1,h2,h3{font-weight:600;letter-spacing:-.3px}
 .plan-customize summary{font-size:14px;padding:13px 0;min-height:48px;font-weight:500}
 .plan-customize summary>span{font-size:11px;font-weight:400;color:var(--muted);margin-left:6px}
 .plan-customize .form-grid{padding:3px 0 14px;gap:13px}
-label{font-size:12px;color:var(--muted)}
+label{font-size:14px;color:var(--ink);font-weight:500}
 select,input,textarea{border:1px solid var(--line);border-radius:15px;background:var(--paper);font-size:15px;min-height:46px;padding:12px;color:var(--ink)}
 select{padding-right:6px}
 .primary,.secondary{border-radius:24px;min-height:46px;font-size:14px;font-weight:500;padding:10px 18px}
@@ -295,7 +295,7 @@ select{padding-right:6px}
 .visit-heading h1{font-size:30px;font-weight:500;letter-spacing:-.4px;line-height:1.2}
 .visit-heading p:not(.eyebrow){font-size:14px;line-height:1.5}
 .active-visit-heading{padding-top:16px;padding-bottom:3px;margin-bottom:14px}
-.active-visit-heading h1{font-size:28px;margin-bottom:15px}
+.active-visit-heading h1{font-size:30px;margin-bottom:15px}
 .active-visit-heading .eyebrow{margin-bottom:7px}
 .visit-progress{font-size:12px}
 .visit-progress a{color:var(--muted);text-decoration:none}
@@ -327,10 +327,10 @@ summary{font-weight:500;font-size:14px;padding:10px 0;min-height:42px}
 .question-input button{width:34px;height:34px;min-height:34px;border-radius:50%;font-size:24px;flex-shrink:0}
 .question-input .voice-button{color:var(--ink);background:transparent;margin-right:3px}
 .voice-button svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round}
-.guide-chat>.fine{font-size:10px;margin:8px 12px 0;text-align:center}
+.guide-chat>.fine{font-size:12px;margin:8px 12px 0;text-align:center}
 .answer-card{border:0;border-radius:18px;background:var(--brand-soft);font-size:14px;padding:16px;margin-top:17px}
 .answer-card>p{line-height:1.65}
-.student-question{padding:18px;border:0;background:var(--paper);border-radius:20px;margin:23px 0}
+.student-question{padding:4px 0 4px 18px;border:0;border-left:2px solid var(--accent);background:transparent;border-radius:0;margin:23px 0}
 .student-question .eyebrow{font-size:11px;color:var(--muted);margin-bottom:12px}
 .real-question{font-size:18px;line-height:1.5;margin-bottom:8px}
 .text-button{font-size:12px;font-weight:500;text-decoration:none}
@@ -384,5 +384,28 @@ dialog h2{font-weight:500}
 /* Live campus guide */
 .guide-thinking{color:var(--muted);padding-block:12px}.answer-question{color:var(--muted);font-size:.9rem}.answer-sources{display:flex;flex-wrap:wrap;gap:8px 16px}.answer-card>p{white-space:pre-line}.guide-settings{margin-top:24px;border-top:1px solid var(--line);padding-top:16px}.guide-settings summary{cursor:pointer;font-weight:600}.guide-settings input{width:100%;margin-block:8px 16px}dialog{max-height:85dvh;overflow-y:auto}
 
-.explore-intro{padding:28px 8px 20px}.explore-intro h2{font-size:1.5rem;line-height:1.2}.explore-intro>p:not(.eyebrow){color:var(--muted)}.resume-visit{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 8px;border-block:1px solid var(--line);color:var(--ink);text-decoration:none}.resume-visit small,.resume-visit strong{display:block}.resume-visit small{color:var(--muted);margin-bottom:4px}.directory-prompt{padding:24px 8px;color:var(--muted)}
+.explore-intro{padding:22px 0 16px}.explore-intro h2{font-size:1.5rem;line-height:1.2}.explore-intro>p:not(.eyebrow){color:var(--muted)}.resume-visit{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 8px;border-block:1px solid var(--line);color:var(--ink);text-decoration:none}.resume-visit small,.resume-visit strong{display:block}.resume-visit small{color:var(--muted);margin-bottom:4px}.directory-prompt{padding:24px 8px;color:var(--muted)}
 .visit-controls{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:12px;flex-wrap:wrap}.visit-controls a{font-size:13px;color:var(--brand)}.visit-recap{padding:12px 4px 28px}.visit-recap h2{font-size:23px;font-weight:500}.visit-recap h3{font-size:16px;margin-top:26px}.visit-recap>p{line-height:1.6}.visit-recap .button-row{flex-wrap:wrap}.visit-progress a{max-width:130px;text-align:right}
+
+/* Tour hierarchy: route first, then one activity and its evidence. */
+.visit-principles{list-style:none;counter-reset:visit-step;margin:22px 0 0;padding:0}
+.visit-principles li{counter-increment:visit-step;position:relative;padding:0 0 22px 37px}
+.visit-principles li:before{content:counter(visit-step,decimal-leading-zero);position:absolute;left:0;top:2px;font-size:12px;color:var(--gold-ink);font-variant-numeric:tabular-nums}
+.visit-principles strong,.visit-principles span{display:block}
+.visit-principles strong{font-size:16px;font-weight:600;margin-bottom:3px}
+.visit-principles span{font-size:14px;color:var(--muted)}
+.future-heading h1{font-size:30px;line-height:1.14;max-width:420px}
+.personal-plan{gap:22px}.personal-plan label{font-size:14px}.personal-plan input,.personal-plan textarea{margin-top:9px}
+.tour-order{list-style:none;counter-reset:route-stop;padding:0;margin:26px 0}
+.tour-order li{counter-increment:route-stop;position:relative;margin-left:13px;padding:0 0 23px 28px;border-left:1px solid var(--line)}
+.tour-order li:before{content:counter(route-stop);position:absolute;left:-13px;top:-1px;width:25px;height:25px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:var(--brand-soft);color:var(--brand);border:3px solid var(--panel)}
+.tour-order li:last-child{border-color:transparent;padding-bottom:0}
+.tour-order strong{font-size:16px;font-weight:600}.tour-order p{line-height:1.45}
+.tour-next{padding:18px 0 12px;border-top:0;border-bottom:1px solid var(--line);margin-bottom:18px}
+.tour-next h2{font-size:24px;margin-bottom:9px}.tour-next>p:not(.fine){font-size:14px;color:var(--muted);margin-bottom:10px}
+.tour-next .eyebrow{font-size:12px;color:var(--gold-ink)}.tour-next .map-link{font-size:13px;min-height:40px;padding:8px 13px;margin:2px 0}
+.guide-privacy{margin:0 12px}.guide-privacy summary{font-size:12px;font-weight:400;color:var(--muted);text-align:center;min-height:32px;padding:5px 0}.guide-privacy .fine{font-size:12px;line-height:1.55}
+.visit-recap{padding-inline:0}.visit-recap h2{font-size:26px;font-weight:600}.visit-recap h3{font-size:17px}
+@media(max-width:519px){.welcome{padding:25px 0 23px}.welcome h1{font-size:34px}.personal-plan{gap:20px}}
+
+.change-campus{margin:0 0 22px;min-height:36px;padding:0;color:var(--brand)}

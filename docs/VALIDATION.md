@@ -124,3 +124,14 @@ Renamed the web interface, Android launcher label, spoken welcome, model identit
 ## Tour narration · November 3, 2026
 
 55 tests passed, including speech formatting, voice selection and invalid saved-pace cases. Strict TypeScript checking, web build, Android debug build and lint passed. Browser checks verified the three pace options, persisted Relaxed after reload, and exercised Test audio and Stop audio without browser errors. Restored Conversational afterward. No listening-quality measurement or physical Android/glasses playback verification is claimed. Voice availability depends on the installed engine; Muse prompt changes have not been exercised with a live key.
+
+
+## Submission polish · November 4, 2026
+
+- 56 tests pass, along with strict TypeScript checking, the web asset build, Android debug assembly and lint. Database integrity is `ok` with 5,877 institution rows. Android lint reports no errors; pre-existing warnings remain.
+- Simplified visit setup, added a numbered route timeline, improved text hierarchy and moved the detailed guide-data explanation into an expandable disclosure. No campus was promoted on the home screen. Retained the original logo and blue/white/gold palette.
+- Llama 3.1 8B continued to time out under the 45-second request limit on this development machine. The local demo now uses Meta Llama 3.2 3B with a smaller evidence-only prompt; the request timeout was not weakened. A real browser question about study spaces and the Digital Humanities Center returned the Shannon Library fact and university link. Current opening hours correctly produced an explicit unknown without invoking the model.
+- Final browser journey: UVA, History, research/quiet study, Arts & humanities, 40 minutes, manual Shannon Library origin; suggested Shannon → Rotunda → Peabody with a 33-minute estimate. Saved a question, marked one activity tried and one stop visited, finished early and reloaded. The recap retained the visited stop and question. No browser console errors were observed. At a 390 × 844 viewport, document and content widths both measured 375 px, with no horizontal overflow.
+- Demo captures use real application screens and sample visitor inputs. They do not establish a physical campus walk, GPS accuracy or glasses compatibility. Live Muse, physical Gen 2 voice/camera operation and hosted HTTPS deployment remain unverified.
+
+- A separate real Llama 3.2 request for Virginia Tech identified Carol M. Newman Library and returned its official `vt.edu` source in 14.047 seconds. This is one measured request, not a general latency or accuracy benchmark.

@@ -1,19 +1,21 @@
 # Campus Compass
-**Campus Compass @ [college]** helps students explore a campus around their prospective major, interests, available time and starting location. Built for phones and an experimental Android integration with Meta glasses.
 
-**[Meta Global AI Developer Hackathon](https://dev.meta.ai/events/global-hackathon) · Indie developer / Build for Your World.** Submission deadline: November 4, 2026, 9 PM ET.
+**Campus Compass @ [college]** turns a prospective student’s major, interests, time and starting point into a campus visit they can try, question and remember.
+
+Built for the **[Meta Global AI Developer Hackathon](https://dev.meta.ai/events/global-hackathon)** · Indie Developer · Build for Your World. Deadline: November 4, 2026, 9 PM ET.
 
 ## Try it
-With Node 22+ installed, run `npm run dev` and open the loopback URL printed in the terminal. No account or dependency installation is needed to plan a tour. For real local inference, start Ollama, install `llama3.1:8b`, then use `npm run demo` instead. Model weights are not included.
 
-## Current progress · November 3
-- Search 5,877 institutions; 52 campuses have mapped guides with 160 landmarks, including Virginia Tech. Other colleges offer self-guided activities.
-- Get a suggested starting stop and personalized itinerary, replan, record visited or skipped stops, save notes and compare visits. Precise GPS stays on the device. Travel times are estimates, not verified walking routes.
-- Muse Spark integration uses the selected campus, interests and itinerary with source checks. Local Llama can select saved campus evidence; a UVA query succeeded, while the Virginia Tech query timed out on the development machine.
-- Narration prefers higher-quality installed English voices, cleans up spoken formatting and offers Relaxed, Conversational and Brisk pacing. It uses device text-to-speech, not Meta's proprietary voice.
-- **55 tests pass**, along with type checking, web build, Android debug build and lint. The Virginia Tech browser flow, saved progress and narration controls have been checked.
+Node 22+: `npm run dev`, then open the local URL printed in the terminal. Planning works without a key or model. For real local inference, install [Ollama](https://ollama.com/), run `ollama pull llama3.2:3b`, then `npm run demo`. Model weights are not included.
 
-## Before submission
-Activate the Muse API key and test real answers. Verify microphone input, spoken output and playback quality on Android with Gen 2 glasses. Field-check routes and visitor access, then record a fresh three-minute demo with Campus Compass branding. Live Muse and physical glasses operation are not yet verified.
+## Progress · November 4
 
-[Judge walkthrough and submission copy](docs/SUBMISSION.md) · [Android / Muse setup](docs/AI-SETUP.md) · [Validation](docs/VALIDATION.md)
+- Search 5,877 institutions. 52 campuses, including Virginia Tech, have mapped guides with 160 landmark pins; other colleges offer self-guided activities.
+- Personalized starting points and time-budgeted itineraries, visited/skipped progress, replanning, local notes and campus comparisons.
+- Meta Llama 3.2 selects saved campus evidence with source links. Muse Spark integration supports a validated visit brief and official web citations; its live test is pending API-key setup.
+- Polished phone interface, adjustable narration and an Android build with experimental Meta glasses speech/camera adapters.
+- **56 tests pass**, with strict type checking, web build, Android debug assembly and lint. A real UVA model answer, unavailable-hours handling and persistent visit recap were verified in the browser.
+
+Physical glasses testing and live Muse verification remain pending. Travel times are estimates; walking paths, entrances and visitor access are not field-verified. The demo shows the browser experience.
+
+[Submission copy and judge walkthrough](docs/SUBMISSION.md) · [Android / Muse setup](docs/AI-SETUP.md) · [Validation](docs/VALIDATION.md) · [Development and starting prototype](docs/DEVELOPMENT.md) · [Licenses](THIRD-PARTY.md)
