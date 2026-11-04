@@ -415,6 +415,6 @@ class MainActivity : AppCompatActivity() {
     }
     companion object {
         private const val HOST = "appassets.androidplatform.net"
-        private val ASSETS = setOf("index.html", "app.js", "guide.js", "core.js", "tour.js", "tour-data.js", "data.js", "fieldwork.js", "falling-block.svg", "directory-data.js", "directory.js", "devices.js", "campus.svg", "style.css", "source-sans-3.ttf", "ucsd.svg", "ut.svg", "uva.svg")
+        private val ASSETS = setOf("index.html", "app.js", "guide.js", "core.js", "tour.js", "tour-data.js", "landmark-data.js", "campus-guides.js", "data.js", "fieldwork.js", "falling-block.svg", "directory-data.js", "directory.js", "devices.js", "campus.svg", "style.css", "source-sans-3.ttf", "ucsd.svg", "ut.svg", "uva.svg")
     }
 }

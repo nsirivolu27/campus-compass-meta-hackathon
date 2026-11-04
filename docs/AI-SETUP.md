@@ -32,7 +32,7 @@ USB is the default developer connection. An authenticated HTTPS path is also imp
 
 ## Sources and privacy
 
-- The server resolves campus IDs against the shipped national directory; clients cannot substitute source records. The three pilot campuses also supply their reviewed stop facts.
+- The server resolves campus IDs against the shipped national directory; clients cannot substitute source records. The 52 mapped campuses add stop evidence. The original three guides use university records. Additional guides distinguish university facts from landmark names and reference coordinates. The server resolves the active itinerary and planned time budget for Muse and requires official web citations for current visitor information.
 - Muse can search for additional official campus information. Only selected-institution citations or supplied-source references are accepted. An answer without an accepted citation is replaced with a clear verification fallback.
 - Citation checks establish attribution, not factual entailment. Manually evaluate accuracy, freshness and campus attribution before relying on the guide for visitor access, hours, pricing or transport.
 - Journal entries, photos and precise location are not sent. Questions, selected campus, major, interests and up to four recent Q&A turns are sent to Meta. `store: false` disables Responses conversation storage; this is not a claim that Meta has no other operational retention.

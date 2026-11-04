@@ -21,6 +21,11 @@ Institution fields include name, reported aliases, address, city/state/ZIP, repo
 
 Coverage has two levels: `curated` for the three manually sourced pilot guides; `self-guided` for general reflection activities and personal notes. Importing a record does not manufacture building descriptions, current hours, accessibility routes or campus-specific answers.
 
-Next data layer: verified campus buildings and visit pages keyed by UNITID, with page-level provenance, review dates and expiry/recheck rules. Map multiple physical locations separately from the institution. Only promote content to a sourced guide after review.
 
-Source: https://nces.ed.gov/ipeds/complete-data-files/HD2025.zip
+## Campus tourism data
+
+The November 3, 2026 snapshot covers all 51 universities at ranks 1–49 of the [2027 U.S. News National Universities table](https://www.ivytalent.com/college/2027-u-s-news-college-rankings-top-50-universities-and-what-changed-from-2026/) including the three-way tie at 49. Virginia Tech is an additional campus. Rank determines the scope of this snapshot only. Every school retains its federal UNITID.
+
+The three original guides have 12 campus-sourced building pins. The other 49 add 148 individually selected landmarks and a university visitor link per institution in `tour-landmarks.json`. Use `python scripts/landmarks.py` after editing that file to synchronize the browser module, directory coverage and the SQLite tour_landmarks table. The full IPEDS importer also applies this layer. Legacy reflection IDs remain available to saved visits and journals.
+
+OpenStreetMap-derived records in this dataset are © OpenStreetMap contributors and available under the [Open Database License](https://www.openstreetmap.org/copyright). Each record links to its exact map element. For ways, the pin is the midpoint of the bounds of the mapped geometry. For nodes it is the published coordinate. Other records link to the university or geotagged landmark page supplying the position. The school's visitor link is a separate source. A map point establishes a reference location. Check university sources for entry, hours, interior uses, accessibility and current routes.

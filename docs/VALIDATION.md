@@ -106,3 +106,12 @@ The product scope is nationwide. UC San Diego, UT Austin and UVA are the first d
 - Browser walkthrough from a fresh origin: searched UVA, set history / research and quiet study, selected Shannon Library as the landmark, and received a three-stop estimate of 32 minutes. A typed question reached the installed Meta Llama 3.1 8B model. It selected the Shannon Library source and the browser displayed the university link. Saved the question, marked one stop visited and finished early. The recap retained one visited stop and one question.
 - First-run testing exposed cold loading and an hours question that selected a related library fact. The local server now warms model weights before listening and declines operational questions outside the scope of the saved records. This is a narrow demo check, not a benchmark of accuracy or response time.
 - No physical Android phone appeared in ADB. The video demonstrates the browser and local model only. A real Muse API call, Gen 2 microphone and speaker test, and hosted endpoint remain unverified.
+
+
+## Campus tourism expansion · November 3
+
+The coverage manifest has 51 ranked U.S. National Universities with ties and Virginia Tech. There are 160 named landmark pins across 52 campuses. Each has a source, an official school visitor link and a local route planner. The database contains the 148 new landmark records keyed by federal UNITID. The original 12 retain their independent university source records. Map review does not establish visitor access or field-tested paths.
+
+Coverage tests check the entire cohort and feasible ten-minute starts at each pin, stable historical journal entries, validated itinerary IDs and handling of current questions. Browser walkthrough: selected Virginia Tech, architecture, student clubs and quiet study spaces, and a Squires Student Center origin. The planner suggested Carol M. Newman Library, Drillfield and Burruss Hall in approximately 38 minutes. This was a manual landmark start.
+
+Muse requests now include the ordered upcoming stops, the selected activity, interests, routine and planned minutes. Ordinary questions use a small search context. Hours and access questions use a medium context and require an institutional search citation before returning a grounded answer. The request and citation logic are tested locally. Live Muse latency and answer quality still require a configured provider key.

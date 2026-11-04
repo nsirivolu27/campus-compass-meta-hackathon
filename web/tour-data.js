@@ -1,3 +1,4 @@
+import {landmarkGuides} from './landmark-data.js';
 /** Official map building points, reviewed 2026-10-27. These are not entrance pins.
  * @typedef {{latitude:number,longitude:number,label:string,source:string}} TourPoint */
 const ucsd='https://admin-enterprise-gis.ucsd.edu/server/rest/services/BaseData/Campus_Map_Vector/MapServer/26';
@@ -24,3 +25,10 @@ export const tourPoints={
   peabody:{latitude:38.035608,longitude:-78.506113,label:'Peabody Hall',source:uva}
  }
 };
+
+for(const guide of landmarkGuides){
+ if(!guide.stops.length)continue;
+ tourPoints['ipeds-'+guide.unitid]=Object.fromEntries(guide.stops.map(stop=>[stop.id,{
+   latitude:stop.latitude,longitude:stop.longitude,label:stop.name,source:stop.mapUrl
+ }]));
+}
