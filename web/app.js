@@ -6,6 +6,7 @@ import {directory,directoryMeta} from './directory-data.js';
 import {searchCampuses,selfGuidedCampus} from './directory.js';
 import {deviceCapabilities} from './devices.js';
 import {askGuide,receiveGuide} from './guide.js';
+import {narrationText,narrationRate,browserVoice} from './narration.js';
 import {tourPoints} from './tour-data.js';
 import {recommendTour,stopReason,walkingMapUrl,interestTags,restoreProgress,advanceTour} from './tour.js';
 const campuses=directory.map(entry=>guideById.get(entry.id)??selfGuidedCampus(entry));
@@ -234,7 +235,19 @@ function render(){
 }
 function stopAudio(){window.FutureNative?.stopSpeaking();window.speechSynthesis?.cancel();}
 /** @param {string} text */
-function speak(text){if(window.FutureNative){window.FutureNative.speak(text);return;}if(!window.speechSynthesis){toast('Audio is unavailable in this browser. You can read the text here.');return;}stopAudio();const utterance=new SpeechSynthesisUtterance(text);utterance.rate=0.95;utterance.onerror=()=>toast('Audio could not play. The text is still available.');window.speechSynthesis.speak(utterance);}
+function speak(text){
+ const spoken=narrationText(text);if(!spoken)return;
+ const rate=narrationRate(String(read('tmf.narration.pace')??'natural'));
+ stopAudio();
+ if(window.FutureNative){window.FutureNative.speak(spoken,rate);return;}
+ if(!window.speechSynthesis){toast('Audio is unavailable in this browser. You can read the text here.');return;}
+ const utterance=new SpeechSynthesisUtterance(spoken);
+ const voice=browserVoice(window.speechSynthesis.getVoices());
+ if(voice)utterance.voice=voice;
+ utterance.lang=voice?.lang??'en-US';utterance.rate=rate;utterance.pitch=1;
+ utterance.onerror=event=>{if(!['canceled','interrupted'].includes(event.error))toast('Audio could not play. The text is still available.');};
+ window.speechSynthesis.speak(utterance);
+}
 /** @param {string} text @param {string} kind @param {{campusId:string,stopId:string}} [context] */
 function saveMemory(text,kind='thought',context){
  const trimmed=text.trim();if(!trimmed){toast('Add a thought first.');return;}
@@ -362,7 +375,13 @@ el('#device-mode').addEventListener('change',event=>{
  deviceStatus=deviceMode==='meta'?'Connect Meta glasses to enable photo capture.':'Bluetooth audio mode';
  updateDevice();render();
 });
-el('#test-audio').onclick=()=>speak('Welcome to Campus Compass. This is your campus guide audio test.');
+const narrationPace=/** @type {HTMLSelectElement} */(el('#narration-pace'));
+const savedPace=String(read('tmf.narration.pace')??'natural');
+narrationPace.value=['relaxed','natural','brisk'].includes(savedPace)?savedPace:'natural';
+narrationPace.onchange=()=>{stopAudio();store('tmf.narration.pace',narrationPace.value);};
+window.speechSynthesis?.getVoices();
+el('#test-audio').onclick=()=>speak('Welcome to Campus Compass. Take a moment to look around. When you’re ready, let’s find a place you’d like to explore.');
+el('#stop-preview').onclick=()=>stopAudio();
 el('#audio-settings').onclick=()=>{if(window.FutureNative)window.FutureNative.openAudioSettings();else toast('Open Bluetooth settings on your paired Android phone.');};
 el('#device-open').onclick=openDevice;
 el('#device-close').onclick=()=>dialog.close();

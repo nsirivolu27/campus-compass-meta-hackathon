@@ -172,6 +172,17 @@ class MainActivity : AppCompatActivity() {
                 narrator?.setAudioAttributes(AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build())
                 val availability = narrator?.setLanguage(Locale.US)
                 speechReady = availability != TextToSpeech.LANG_MISSING_DATA && availability != TextToSpeech.LANG_NOT_SUPPORTED
+                // Quality is reported by the installed engine; keep narration on-device when possible.
+                val bestVoice = narrator?.voices.orEmpty()
+                    .filter { it.locale.language == "en" && !it.isNetworkConnectionRequired &&
+                        TextToSpeech.Engine.KEY_FEATURE_NOT_INSTALLED !in it.features.orEmpty() }
+                    .sortedWith(compareByDescending<android.speech.tts.Voice> { it.quality }
+                        .thenByDescending { it.locale.country == "US" }
+                        .thenBy { it.latency }.thenBy { it.name })
+                    .firstOrNull()
+                if (bestVoice != null) narrator?.setVoice(bestVoice)
+                narrator?.setPitch(1.0f)
+                narrator?.setSpeechRate(0.97f)
             }
         }
     }
@@ -224,9 +235,10 @@ class MainActivity : AppCompatActivity() {
                 catch (_: Exception) { status("Capture failed. Reconnect your glasses and try again.", false) }
             }
         }
-        @JavascriptInterface fun speak(text: String) = runOnUiThread {
+        @JavascriptInterface fun speak(text: String, rate: Double) = runOnUiThread {
             stopVoice()
             if (!speechReady) { emit("error", "Android speech is not ready. Check installed text-to-speech voices."); return@runOnUiThread }
+            narrator?.setSpeechRate(if (rate.isFinite()) rate.toFloat().coerceIn(0.9f, 1.05f) else 0.97f)
             val result = narrator?.speak(text.take(3500), TextToSpeech.QUEUE_FLUSH, null, "campus-guide")
             if (result == TextToSpeech.ERROR) emit("error", "Narration could not start. You can read the text on screen.")
         }
@@ -415,6 +427,6 @@ class MainActivity : AppCompatActivity() {
     }
     companion object {
         private const val HOST = "appassets.androidplatform.net"
-        private val ASSETS = setOf("index.html", "app.js", "guide.js", "core.js", "tour.js", "tour-data.js", "landmark-data.js", "campus-guides.js", "data.js", "fieldwork.js", "falling-block.svg", "directory-data.js", "directory.js", "devices.js", "campus.svg", "style.css", "source-sans-3.ttf", "ucsd.svg", "ut.svg", "uva.svg")
+        private val ASSETS = setOf("index.html", "app.js", "narration.js", "guide.js", "core.js", "tour.js", "tour-data.js", "landmark-data.js", "campus-guides.js", "data.js", "fieldwork.js", "falling-block.svg", "directory-data.js", "directory.js", "devices.js", "campus.svg", "style.css", "source-sans-3.ttf", "ucsd.svg", "ut.svg", "uva.svg")
     }
 }

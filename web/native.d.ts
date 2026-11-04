@@ -5,7 +5,7 @@ interface Window {
     openAudioSettings():void;
     disconnect():void;
     capture():void;
-    speak(text:string):void;
+    speak(text:string,rate:number):void;
     stopSpeaking():void;
     listen(id:string):void;
     stopListening():void;

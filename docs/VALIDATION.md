@@ -120,3 +120,7 @@ The Virginia Tech local Llama question timed out during final inference checks, 
 ## Campus Compass rename · November 3, 2026
 
 Renamed the web interface, Android launcher label, spoken welcome, model identity, journal exports and entry copy. Preserved installed-app and storage identifiers. All 52 tests, strict TypeScript checking, web build, Android debug build and Android lint passed. The browser rendered Campus Compass @ Virginia Tech and the three-stop preview from Squires Student Center. No live Muse request or physical glasses test is claimed; the latest account check still required billing setup, and ADB listed no phone. Earlier privately archived demo videos retain the previous branding and need a fresh recording before submission.
+
+## Tour narration · November 3, 2026
+
+55 tests passed, including speech formatting, voice selection and invalid saved-pace cases. Strict TypeScript checking, web build, Android debug build and lint passed. Browser checks verified the three pace options, persisted Relaxed after reload, and exercised Test audio and Stop audio without browser errors. Restored Conversational afterward. No listening-quality measurement or physical Android/glasses playback verification is claimed. Voice availability depends on the installed engine; Muse prompt changes have not been exercised with a live key.

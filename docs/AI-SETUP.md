@@ -32,6 +32,12 @@ USB is the default developer connection. An authenticated HTTPS path is also imp
 
 ## Sources and privacy
 
+### Tour narration
+
+In **Glasses**, choose a narration pace and use **Test audio**. Conversational is the default; Relaxed and Brisk are saved on the device. Android prefers the highest engine-reported quality among installed, offline English voices, then US English and lower latency. If none is available, it retains the engine's existing English voice. Browsers prefer local English voices explicitly labelled Natural, Neural, Enhanced or Premium, otherwise a local English/default voice. These labels and Android's quality ratings are provider metadata, not a measured listening score.
+
+Spoken text removes citation markers, web addresses and formatting, preserves displayed sources, and adds punctuation between lines. Selected campus acronyms are spelled out. Muse is prompted to use short, conversational sentences; live results still require provider setup. No new cloud speech provider or voice clone is used. Install a higher-quality English voice through the phone's text-to-speech settings if the available voice still sounds mechanical. Real phone/glasses listening is required to judge quality and audio routing.
+
 - The server resolves campus IDs against the shipped national directory; clients cannot substitute source records. The 52 mapped campuses add stop evidence. The original three guides use university records. Additional guides distinguish university facts from landmark names and reference coordinates. The server resolves the active itinerary and planned time budget for Muse and requires official web citations for current visitor information.
 - Muse can search for additional official campus information. Only selected-institution citations or supplied-source references are accepted. An answer without an accepted citation is replaced with a clear verification fallback.
 - Citation checks establish attribution, not factual entailment. Manually evaluate accuracy, freshness and campus attribution before relying on the guide for visitor access, hours, pricing or transport.
