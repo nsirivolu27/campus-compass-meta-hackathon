@@ -45,6 +45,6 @@ For Android USB pairing, see [AI setup](AI-SETUP.md). For exact test evidence an
 
 ## Manual submission
 
-The [finished 2:59 demo](https://github.com/nsirivolu27/campus-compass-meta-hackathon/releases/download/v0.1.0-hackathon/Campus-Compass-demo.mp4) is public and linked in the submission draft. It uses real browser captures, English captions and locally generated Kokoro narration; the app itself uses device speech synthesis.
+Use the [new 2:59 glasses-focused demo](https://github.com/nsirivolu27/campus-compass-meta-hackathon/releases/download/v0.1.0-hackathon/Campus-Compass-glasses-demo.mp4) for submission. It combines recorded app screens and an illustrated Android glasses interaction, with English captions and locally generated Kokoro narration; the app itself uses device speech synthesis. Replace the earlier video URL in any existing form draft with this one.
 
 Review all text and your team listing, complete any personal-opinion questions, and make the promotion/consent choice yourself. The form has **Very likely** and **Very favorable** selected as instructed. No submission has been sent by the assistant.
